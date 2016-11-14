@@ -1,0 +1,134 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Code copied with adaptations/edits/removals by Anonymous 10/31/16 from:
+// Owen Astrachan 11/8/95
+// revised 3/30/00, key must be a string, value can be anything
+
+template<class Value>
+class Applicant
+{
+  public:
+    //virtual ~Applicant() {};
+    virtual void applyOne(string &key, Value & value) = 0;
+};
+
+template<class Value>
+class HMap
+{
+  public:
+  	 HMap(int size); // size of Hashmap
+  	//~HMap();
+  	
+  	virtual bool contains(const string & key) const;        // is key in map?
+  	
+  	virtual Value& get(const string& key);
+  	
+  	virtual void remove(const string & key);
+  	virtual void insert(const pair<string,Value> & pair);
+  	virtual void insert(const string & key, const Value & value);
+  	
+  	virtual void applyAll(Applicant<Value> & obj);
+  	
+  private:
+    struct Node
+    {
+	  pair<string, Value> info;
+	  Node * next;
+	  Node (const string& s,
+	        const Value& v,
+	        Node * ptr)
+	      : info(s,v), next(ptr)
+	  {
+		
+	  }
+    };
+
+    virtual unsigned int hash(const string &key) const;
+    
+    vector<Node *> myList;                  // vector of nodes
+    int myNumElts;                          // # elements stored
+};
+
+template<class Value>
+HMap<Value>::HMap(int size): myList(size,nullptr), myNumElts(0) {
+	// fill myList with nullptrs
+}
+
+template <class Value>
+bool HMap<Value>::contains(const string & key) const
+// postcondition: returns true if key in map, otherwise returns false
+{
+	if 
+
+}
+
+template <class Value>
+Value & HMap<Value>::get(const string & key)
+// postcondition: returns value associated with key in map
+// exception: if key not in map, error printed, program halted
+{
+	// plug key into hashing function, mod it by length
+	int index = hash(key) % myList.length();
+	bool keyInMap = FALSE;
+	Node * current = myList[index]
+	while(current != nullptr and not keyInMap){
+		if(current->info.first == key){
+			keyInMap == True
+		};
+		else{
+			current = current.next
+		};
+	}
+
+}
+
+
+template <class Value>
+unsigned int HMap<Value>::hash(const string & key) const
+{
+	
+    unsigned int hval = 0;
+    int k;
+    int len = key.length();
+    for(k=0; k < len; k++)
+    {
+        hval = (hval << 5) ^ hval ^ key[k]; // ^ is XOR
+    }
+    return hval;
+    
+}
+
+template <class Value>
+void HMap<Value>::remove(const string & key) 
+// postcondition: returns index of key in private vector (pointer)
+//                returns 0 if key NOT in vector
+{
+	
+}
+
+template <class Value>
+void HMap<Value>::insert(const pair<string,Value> & pair)
+// precondition: pair.first key NOT stored in map
+// postcondition: pair is added to map (maps pair.first -> pair.second)
+{
+	//hash()
+}
+
+template <class Value>
+void HMap<Value>::insert(const string & key, const Value & val)
+{
+    insert(pair<string,Value>(key,val));
+}
+
+template <class Value>
+void HMap<Value>::applyAll(Applicant<Value> & obj)
+// postcondition: obj.applyOne() applied to all map elements     
+{
+
+}
+
+int main() {
+    HMap<int> map(10);
+}
