@@ -144,7 +144,9 @@ void HMap<Value>::insert(const pair<string,Value> & pair)
 // precondition: pair.first key NOT stored in map
 // postcondition: pair is added to map (maps pair.first -> pair.second)
 {
-	//hash()
+	int index = hash(key) %myList.length();
+	myList[index] = new Node(pair.first, pair.second, myList[index]);
+	
 }
 
 template <class Value>
