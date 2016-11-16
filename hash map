@@ -60,7 +60,17 @@ template <class Value>
 bool HMap<Value>::contains(const string & key) const
 // postcondition: returns true if key in map, otherwise returns false
 {
-	if 
+	int index = hash(key) % myList.length();
+	bool keyInMap = false;
+	Node * current = myList[index];
+	while(current != nullptr and not keyInMap){
+		if(current->info.first == key){
+			keyInMap = true;
+		}
+		else{
+			current = current.next;
+		}
+	return keyInMap;
 
 }
 
@@ -71,15 +81,21 @@ Value & HMap<Value>::get(const string & key)
 {
 	// plug key into hashing function, mod it by length
 	int index = hash(key) % myList.length();
-	bool keyInMap = FALSE;
-	Node * current = myList[index]
+	bool keyInMap = false;
+	Node * current = myList[index];
 	while(current != nullptr and not keyInMap){
 		if(current->info.first == key){
-			keyInMap == True
-		};
+			keyInMap = true;
+		}
 		else{
-			current = current.next
-		};
+			current = current.next;
+		}
+	if(keyInMap){
+			return current->info.first;
+	}
+	else{
+		cout << "ERROR! Key not in map."
+			
 	}
 
 }
@@ -105,7 +121,22 @@ void HMap<Value>::remove(const string & key)
 // postcondition: returns index of key in private vector (pointer)
 //                returns 0 if key NOT in vector
 {
-	
+	if(contains(key)){
+		int index = hash(key) % myList.length();
+		Node * current = myList[index];
+		Node * previous	= nullptr;
+		while(current->first.info != key){
+			previous = current;
+			current = current->next;
+		}
+		if(previous == nullptr){
+			myList[index] = nullptr;
+		}
+		else{
+			prevous->next = current->next;
+		}
+		delete current;
+	}
 }
 
 template <class Value>
