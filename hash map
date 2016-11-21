@@ -15,6 +15,9 @@ class Applicant
 };
 
 template<class Value>
+class HMapIterator;
+
+template<class Value>
 class HMap
 {
   public:
@@ -30,6 +33,9 @@ class HMap
   	virtual void insert(const string & key, const Value & value);
   	
   	virtual void applyAll(Applicant<Value> & obj);
+  	
+  	virtual HMapIterator<Value> * makeIterator();
+    friend class HMapIterator<Value>;
   	
   private:
     struct Node
@@ -51,6 +57,8 @@ class HMap
     int myNumElts;                          // # elements stored
 };
 
+
+
 template<class Value>
 HMap<Value>::HMap(int size): myList(size,nullptr), myNumElts(0) {
 	// fill myList with nullptrs
@@ -60,7 +68,7 @@ template <class Value>
 bool HMap<Value>::contains(const string & key) const
 // postcondition: returns true if key in map, otherwise returns false
 {
-	int index = hash(key) % myList.length();
+  int index = hash(key) % myList.length();
 	bool keyInMap = false;
 	Node * current = myList[index];
 	while(current != nullptr and not keyInMap){
@@ -79,7 +87,6 @@ Value & HMap<Value>::get(const string & key)
 // postcondition: returns value associated with key in map
 // exception: if key not in map, error printed, program halted
 {
-	// plug key into hashing function, mod it by length
 	int index = hash(key) % myList.length();
 	bool keyInMap = false;
 	Node * current = myList[index];
@@ -97,7 +104,6 @@ Value & HMap<Value>::get(const string & key)
 		cout << "ERROR! Key not in map."
 			
 	}
-
 }
 
 
@@ -146,8 +152,7 @@ void HMap<Value>::insert(const pair<string,Value> & pair)
 {
 	int index = hash(key) %myList.length();
 	myList[index] = new Node(pair.first, pair.second, myList[index]);
-	
-}
+	}
 
 template <class Value>
 void HMap<Value>::insert(const string & key, const Value & val)
@@ -162,6 +167,55 @@ void HMap<Value>::applyAll(Applicant<Value> & obj)
 
 }
 
+template <class Value>
+HMapIterator<Value> * HMap<Value>::makeIterator() {
+  
+}
+
+template <class Value>
+class HMapIterator
+{
+  public:
+    HMapIterator(HMap<Value>& map);
+    //virtual ~HMapIterator() {}
+    virtual void Init();
+    virtual bool HasMore() const;
+    virtual void Next();
+    virtual Value& Current();
+    
+  private:
+    HMap<Value>& myMap;
+    typename HMap<Value>::Node * current;
+    int myIndex;
+    
+};
+
+template<class Value>
+HMapIterator<Value>::HMapIterator(HMap<Value>& map): myMap(map), myIndex(0), current(map.myList[0]) {
+  
+}
+
+template<class Value>
+void HMapIterator<Value>::Init() {
+  
+}
+
+template<class Value>
+bool HMapIterator<Value>::HasMore() const {
+  
+}
+
+template<class Value>
+void HMapIterator<Value>::Next() {
+  
+}
+
+template<class Value>
+Value& HMapIterator<Value>::Current() {
+  
+}
+
 int main() {
     HMap<int> map(10);
+    
 }
