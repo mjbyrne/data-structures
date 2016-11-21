@@ -164,7 +164,14 @@ template <class Value>
 void HMap<Value>::applyAll(Applicant<Value> & obj)
 // postcondition: obj.applyOne() applied to all map elements     
 {
-
+  for(int i ==0; i < myList.length() - 1; i++){
+    Node * current = myList[i]
+      while(current != nullptr){
+        obj.applyOne(myList[i]->info.first, myList[i]->info.second);
+        current = current.next
+      }
+    }
+  }
 }
 
 template <class Value>
