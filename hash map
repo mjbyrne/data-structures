@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -14,6 +15,17 @@ class Applicant
     virtual void applyOne(string &key, Value & value) = 0;
 };
 
+template<Class Value>
+class Printer:public Applicant
+{
+  virtual void applyOne(string &key, Value & value) 
+};
+
+template<Class Value>
+void Printer<Value>::applyOne(string &key, Value & value){
+  cout << key << value << endl;
+};
+  
 template<class Value>
 class HMapIterator;
 
@@ -168,7 +180,7 @@ void HMap<Value>::applyAll(Applicant<Value> & obj)
     Node * current = myList[i]
       while(current != nullptr){
         obj.applyOne(myList[i]->info.first, myList[i]->info.second);
-        current = current.next
+        current = current.next;
       }
     }
   }
