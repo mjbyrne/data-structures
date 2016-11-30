@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -15,13 +14,13 @@ class Applicant
     virtual void applyOne(string &key, Value & value) = 0;
 };
 
-template<Class Value>
-class Printer:public Applicant
+template<class Value>
+class Printer:public Applicant<Value>
 {
-  virtual void applyOne(string &key, Value & value) 
+  virtual void applyOne(string &key, Value & value); 
 };
 
-template<Class Value>
+template<class Value>
 void Printer<Value>::applyOne(string &key, Value & value){
   cout << key << value << endl;
 };
@@ -88,8 +87,9 @@ bool HMap<Value>::contains(const string & key) const
 			keyInMap = true;
 		}
 		else{
-			current = current.next;
+			current = current->next;
 		}
+	}
 	return keyInMap;
 
 }
@@ -109,12 +109,12 @@ Value & HMap<Value>::get(const string & key)
 		else{
 			current = current.next;
 		}
+	}
 	if(keyInMap){
 			return current->info.first;
 	}
 	else{
-		cout << "ERROR! Key not in map."
-			
+		cout << "ERROR! Key not in map.";
 	}
 }
 
@@ -151,7 +151,7 @@ void HMap<Value>::remove(const string & key)
 			myList[index] = nullptr;
 		}
 		else{
-			prevous->next = current->next;
+			previous->next = current->next;
 		}
 		delete current;
 	}
@@ -162,9 +162,9 @@ void HMap<Value>::insert(const pair<string,Value> & pair)
 // precondition: pair.first key NOT stored in map
 // postcondition: pair is added to map (maps pair.first -> pair.second)
 {
-	int index = hash(key) %myList.length();
+	int index = hash(pair.first) %myList.length();
 	myList[index] = new Node(pair.first, pair.second, myList[index]);
-	}
+}
 
 template <class Value>
 void HMap<Value>::insert(const string & key, const Value & val)
@@ -176,19 +176,18 @@ template <class Value>
 void HMap<Value>::applyAll(Applicant<Value> & obj)
 // postcondition: obj.applyOne() applied to all map elements     
 {
-  for(int i ==0; i < myList.length() - 1; i++){
-    Node * current = myList[i]
-      while(current != nullptr){
-        obj.applyOne(myList[i]->info.first, myList[i]->info.second);
-        current = current.next;
-      }
+  for(int i = 0; i < myList.length() - 1; i++){
+    Node * current = myList[i];
+    while(current != nullptr){
+      obj.applyOne(myList[i]->info.first, myList[i]->info.second);
+      current = current.next;
     }
   }
 }
 
 template <class Value>
 HMapIterator<Value> * HMap<Value>::makeIterator() {
-  
+  return new HMapIterator<Value>(* this);
 }
 
 template <class Value>
