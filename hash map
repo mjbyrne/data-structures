@@ -215,12 +215,23 @@ HMapIterator<Value>::HMapIterator(HMap<Value>& map): myMap(map), myIndex(0), cur
 
 template<class Value>
 void HMapIterator<Value>::Init() {
+  while(current == nullptr){
+    current = current->next;
+  }
+    
+}
   //find first element in hmap and set current pointer to that
   //because myList[0] could be a nullptr
 }
 
 template<class Value>
 bool HMapIterator<Value>::HasMore() const {
+  Node * currentCopy = current;
+  myIndexCopy = myIndex;
+  bool moreElements = false;
+  while(not moreElements and current != myIndex(length)){
+    if cu
+  }
   //are there anyone elements past the current pointer
 }
 
@@ -236,5 +247,5 @@ Value& HMapIterator<Value>::Current() {
 
 int main() {
     HMap<int> map(10);
-    
+
 }
