@@ -107,7 +107,7 @@ Value & HMap<Value>::get(const string & key)
 			keyInMap = true;
 		}
 		else{
-			current = current.next;
+			current = current->next;
 		}
 	}
 	if(keyInMap){
@@ -180,7 +180,7 @@ void HMap<Value>::applyAll(Applicant<Value> & obj)
     Node * current = myList[i];
     while(current != nullptr){
       obj.applyOne(myList[i]->info.first, myList[i]->info.second);
-      current = current.next;
+      current = current->next;
     }
   }
 }
@@ -222,28 +222,44 @@ void HMapIterator<Value>::Init() {
 }
   //find first element in hmap and set current pointer to that
   //because myList[0] could be a nullptr
-}
+
 
 template<class Value>
 bool HMapIterator<Value>::HasMore() const {
   Node * currentCopy = current;
-  myIndexCopy = myIndex;
+  int myIndexCopy = myIndex;
   bool moreElements = false;
-  while(not moreElements and current != myIndex(length)){
-    if cu
+  if(currentCopy.next != nullptr){
+      moreElements = true;
+  while(not moreElements and current < myList.length()){
+    (myList[myIndexCopy] == nullptr){
+      myIndexCopy = myIndexCopy + 1;
+    }
   }
+  return moreElements;
   //are there anyone elements past the current pointer
 }
 
 template<class Value>
-void HMapIterator<Value>::Next() {
-//advance pointer
+void HMapIterator<Value>::Next(){
+  if(current->next != nullptr){
+    current = current->next;
+  }
+  else{
+    myIndex = myIndex + 1;
+    current = myList[myIndex];
+    while(myList[myIndex] == nulptr){
+      myIndex = myIndex + 1;
+      current = myList[myIndex];
+    }
+  }
+  //advance pointer
 }
 
 template<class Value>
 Value& HMapIterator<Value>::Current() {
- //return current value 
-}
+  return current->info.second;
+  }
 
 int main() {
     HMap<int> map(10);
