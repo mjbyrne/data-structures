@@ -79,7 +79,7 @@ template <class Value>
 bool HMap<Value>::contains(const string & key) const
 // postcondition: returns true if key in map, otherwise returns false
 {
-  int index = hash(key) % myList.length();
+  int index = hash(key) % myList.size();
 	bool keyInMap = false;
 	Node * current = myList[index];
 	while(current != nullptr and not keyInMap){
@@ -99,7 +99,7 @@ Value & HMap<Value>::get(const string & key)
 // postcondition: returns value associated with key in map
 // exception: if key not in map, error printed, program halted
 {
-	int index = hash(key) % myList.length();
+	int index = hash(key) % myList.size();
 	bool keyInMap = false;
 	Node * current = myList[index];
 	while(current != nullptr and not keyInMap){
@@ -111,7 +111,7 @@ Value & HMap<Value>::get(const string & key)
 		}
 	}
 	if(keyInMap){
-			return current->info.first;
+			return current->info.second;
 	}
 	else{
 		cout << "ERROR! Key not in map.";
@@ -125,7 +125,7 @@ unsigned int HMap<Value>::hash(const string & key) const
 	
     unsigned int hval = 0;
     int k;
-    int len = key.length();
+    int len = key.size();
     for(k=0; k < len; k++)
     {
         hval = (hval << 5) ^ hval ^ key[k]; // ^ is XOR
@@ -140,10 +140,10 @@ void HMap<Value>::remove(const string & key)
 //                returns 0 if key NOT in vector
 {
 	if(contains(key)){
-		int index = hash(key) % myList.length();
+		int index = hash(key) % myList.size();
 		Node * current = myList[index];
 		Node * previous	= nullptr;
-		while(current->first.info != key){
+		while(current->info.first != key){
 			previous = current;
 			current = current->next;
 		}
@@ -162,7 +162,7 @@ void HMap<Value>::insert(const pair<string,Value> & pair)
 // precondition: pair.first key NOT stored in map
 // postcondition: pair is added to map (maps pair.first -> pair.second)
 {
-	int index = hash(pair.first) %myList.length();
+	int index = hash(pair.first) %myList.size();
 	myList[index] = new Node(pair.first, pair.second, myList[index]);
 }
 
@@ -176,7 +176,7 @@ template <class Value>
 void HMap<Value>::applyAll(Applicant<Value> & obj)
 // postcondition: obj.applyOne() applied to all map elements     
 {
-  for(int i = 0; i < myList.length() - 1; i++){
+  for(int i = 0; i < myList.size() - 1; i++){
     Node * current = myList[i];
     while(current != nullptr){
       obj.applyOne(myList[i]->info.first, myList[i]->info.second);
@@ -226,18 +226,19 @@ void HMapIterator<Value>::Init() {
 
 template<class Value>
 bool HMapIterator<Value>::HasMore() const {
-  Node * currentCopy = current;
+  typename HMap<Value>::Node * currentCopy = current;
   int myIndexCopy = myIndex;
   bool moreElements = false;
-  if(currentCopy.next != nullptr){
+  if(currentCopy->next != nullptr){
       moreElements = true;
-  while(not moreElements and current < myList.length()){
-    (myList[myIndexCopy] == nullptr){
-      myIndexCopy = myIndexCopy + 1;
+    while(not moreElements and myIndexCopy < myMap.myList.size()){
+      if (myMap.myList[myIndexCopy] == nullptr){
+       myIndexCopy = myIndexCopy + 1;
+      }
     }
-  }
-  return moreElements;
+   return moreElements;
   //are there anyone elements past the current pointer
+  }
 }
 
 template<class Value>
@@ -247,10 +248,10 @@ void HMapIterator<Value>::Next(){
   }
   else{
     myIndex = myIndex + 1;
-    current = myList[myIndex];
-    while(myList[myIndex] == nulptr){
+    current = myMap.myList[myIndex];
+    while(myMap.myList[myIndex] == nullptr){
       myIndex = myIndex + 1;
-      current = myList[myIndex];
+      current = myMap.myList[myIndex];
     }
   }
   //advance pointer
