@@ -12,20 +12,34 @@ int main() {
 //  char c = '0';
 //  a = a - c;
 //  cout << a << "\n";
-  
-  
+//  str.clear();
+
+  string example = "( + ( - 8 3 -2 ) ( * 78 2 ) )";
+  int length = example.length();
+  string holder;
   int index = 0;
-  stack<char> mystack; 
+  stack<string> mystack; 
   while(index < length){
-    if (example[index] != ' '){
-      mystack.push(example[index]);
+    if (example[index] == ' ' or index == length - 1){
+      mystack.push(holder);
+      holder.clear();
+    }
+    else {
+      holder += example[index];
     }
     index = index + 1;
   }
-  // string is now on the stack (still characters)
+  // string is now on the stack (as strings)
+  // takes care of multiple digit numbers and negative numbers
   // whitespace removed
   
+  while(!mystack.empty()){
+    cout << mystack.top() << '\n';
+    mystack.pop();
+  }
 
+
+/*
   int total = 0;
   char c = '0';
   int a = 0;
@@ -68,7 +82,7 @@ int main() {
   
   // this only works for single digits, need to parse 72 vs 7 2
     
-    
+  */
     
     
     
