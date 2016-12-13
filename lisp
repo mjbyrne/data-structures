@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <cstdlib>
 using namespace std;
 
 int main() {
@@ -18,16 +19,20 @@ int main() {
   int length = example.length();
   string holder;
   int index = 0;
-  stack<string> mystack; 
+  stack<string> mystack;
+  stack<int> numberstack;
   while(index < length){
-    if (example[index] == ' ' or index == length - 1){
-      mystack.push(holder);
-      holder.clear();
+    while(example[index != ')']{
+      if (example[index] == ' ' or index == length - 1){
+        mystack.push(holder);
+        holder.clear();
+      }
+      else {
+       holder += example[index];
+      }
+      index = index + 1;
     }
-    else {
-      holder += example[index];
-    }
-    index = index + 1;
+    
   }
   // string is now on the stack (as strings)
   // takes care of multiple digit numbers and negative numbers
@@ -38,6 +43,31 @@ int main() {
     mystack.pop();
   }
 
+// for stoi use http://cpp.sh/
+/* copy this and try
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+#include <stdlib.h>
+
+
+using namespace std;
+
+int main() {
+
+    string test = "-45";
+    int myint = atoi(test.c_str());
+    myint = myint + 10;
+    int urint = 10;
+    string urstring = itoa(urint);
+    cout << myint << '\n';
+    cout << urstring << '\n';
+}
+
+*/
+// HOW TO USE ATOI:
+//atoi(PUTSTRINGHERE.c_str());
 
 /*
   int total = 0;
