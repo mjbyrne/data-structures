@@ -28,8 +28,47 @@ int main() {
                 total = total + numberstack.top();
                 numberstack.pop();
             }
-            stringstack.pop();
-            stringstack.pop();
+            stringstack.pop(); // gets rid of operator we just used
+            stringstack.pop(); // gets rid of the ( that we no longer need
+            stringstack.push(to_string(total));
+        }
+        index = index + 1;
+
+        if(stringstack.top() == '-'){
+            total = numberstack.top();
+            numberstack.pop();
+            while(!numberstack.empty()){
+                total = total - numberstack.top();
+                numberstack.pop();
+            }
+            stringstack.pop(); // gets rid of operator we just used
+            stringstack.pop(); // gets rid of the ( that we no longer need
+            stringstack.push(to_string(total));
+        }
+        index = index + 1;
+
+        if(stringstack.top() == '*'){
+            total = numberstack.top();
+            numberstack.pop();
+            while(!numberstack.empty()){
+                total = total * numberstack.top();
+                numberstack.pop();
+            }
+            stringstack.pop(); // gets rid of operator we just used
+            stringstack.pop(); // gets rid of the ( that we no longer need
+            stringstack.push(to_string(total));
+        }
+        index = index + 1;
+
+        if(stringstack.top() == '/'){
+            total = numberstack.top();
+            numberstack.pop();
+            while(!numberstack.empty()){
+                total = total / numberstack.top();
+                numberstack.pop();
+            }
+            stringstack.pop(); // gets rid of operator we just used
+            stringstack.pop(); // gets rid of the ( that we no longer need
             stringstack.push(to_string(total));
         }
         index = index + 1;
@@ -48,5 +87,8 @@ int main() {
     cout << stringstack.top() << endl;
     stringstack.pop();
   }
+  
+  cout << stringstack.top();
+  
 
 }
