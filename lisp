@@ -16,12 +16,12 @@ int main() {
   stack<int> numberstack;
   while(index < length){
     if(example[index] == ')'){
-        while(stringstack.top() != '+' and stringstack.top() != '-' and stringstack.top() != '*' and stringstack.top() != '/'){
+        while(stringstack.top() != "+" and stringstack.top() != "-" and stringstack.top() != "*" and stringstack.top() != "/"){
             numconv = stod(stringstack.top());
             numberstack.push(numconv);
             stringstack.pop();
         }
-        if(stringstack.top() == '+'){
+        if(stringstack.top() == "+"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -31,10 +31,10 @@ int main() {
             stringstack.pop(); // gets rid of operator we just used
             stringstack.pop(); // gets rid of the ( that we no longer need
             stringstack.push(to_string(total));
+            index = index + 1;            
         }
-        index = index + 1;
 
-        if(stringstack.top() == '-'){
+        if(stringstack.top() == "-"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -44,10 +44,11 @@ int main() {
             stringstack.pop(); // gets rid of operator we just used
             stringstack.pop(); // gets rid of the ( that we no longer need
             stringstack.push(to_string(total));
+            index = index + 1;            
         }
-        index = index + 1;
 
-        if(stringstack.top() == '*'){
+
+        if(stringstack.top() == "*"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -57,10 +58,11 @@ int main() {
             stringstack.pop(); // gets rid of operator we just used
             stringstack.pop(); // gets rid of the ( that we no longer need
             stringstack.push(to_string(total));
+            index = index + 1;            
         }
-        index = index + 1;
 
-        if(stringstack.top() == '/'){
+
+        if(stringstack.top() == "/"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -70,25 +72,26 @@ int main() {
             stringstack.pop(); // gets rid of operator we just used
             stringstack.pop(); // gets rid of the ( that we no longer need
             stringstack.push(to_string(total));
+            index = index + 1;            
         }
-        index = index + 1;
+
+
          
     else if (example[index] == ' ' or index == length - 1){
       stringstack.push(holder);
       holder.clear();
     }
     else {
-    holder += example[index];
+        holder += example[index];
     }
     index = index + 1;
-  }
-  
-  while(!stringstack.empty()){
-    cout << stringstack.top() << endl;
-    stringstack.pop();
-  }
-  
-  cout << stringstack.top();
-  
+    }
 
+  
+    while(!stringstack.empty()){
+        cout << stringstack.top() << endl;
+        stringstack.pop();
+    }
+
+    }
 }
