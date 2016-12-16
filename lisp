@@ -7,13 +7,15 @@ using namespace std;
 
 int main() {
   string example = "( + ( - 8 3 -2 ) ( * 78 2 ) )";
+  cout << "Our example is: " << example << endl;
+  
   int length = example.length();
   string holder;
   int index = 0;
   double numconv = 0;
   double total = 0;
   stack<string> stringstack;
-  stack<int> numberstack;
+  stack<double> numberstack;
   while(index < length){
     if(example[index] == ')'){
         while(stringstack.top() != "+" and stringstack.top() != "-" and stringstack.top() != "*" and stringstack.top() != "/"){
@@ -34,7 +36,7 @@ int main() {
             index = index + 1;            
         }
 
-        if(stringstack.top() == "-"){
+        else if(stringstack.top() == "-"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -48,7 +50,7 @@ int main() {
         }
 
 
-        if(stringstack.top() == "*"){
+        else if(stringstack.top() == "*"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -62,7 +64,7 @@ int main() {
         }
 
 
-        if(stringstack.top() == "/"){
+        else if(stringstack.top() == "/"){
             total = numberstack.top();
             numberstack.pop();
             while(!numberstack.empty()){
@@ -87,11 +89,8 @@ int main() {
     index = index + 1;
     }
 
-  
-    while(!stringstack.empty()){
-        cout << stringstack.top() << endl;
-        stringstack.pop();
-    }
+  }
+    cout << stringstack.top() << endl;
 
-    }
+
 }
