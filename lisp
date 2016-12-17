@@ -15,8 +15,10 @@ int main() {
     double total = 0;
     stack<string> stringstack;
     stack<double> numberstack;
-    while(index < length){
-        if(example[index] == ')'){
+    
+    while(index <= length){
+        if(stringstack.top() == ")"){
+            stringstack.pop();
             while(stringstack.top() != "+" and stringstack.top() != "-" and stringstack.top() != "*" and stringstack.top() != "/"){
                 numconv = stod(stringstack.top());
                 numberstack.push(numconv);
@@ -78,7 +80,7 @@ int main() {
 
 
          
-        else if (example[index] == ' ' or index == length - 1){
+        else if (example[index] == ' ' or index == length){
         stringstack.push(holder);
         holder.clear();
         index = index + 1;
