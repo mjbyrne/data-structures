@@ -17,7 +17,12 @@ int main() {
     stack<double> numberstack;
     
     while(index <= length){
-        if(stringstack.top() == ")"){
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // If you put a cout statement in any of the following if's or else if's they never print.//
+    ////////////////////////////////////////////////////////////////////////////////////////////
+       
+       if(stringstack.top() == ")"){
             stringstack.pop();
             while(stringstack.top() != "+" and stringstack.top() != "-" and stringstack.top() != "*" and stringstack.top() != "/"){
                 numconv = stod(stringstack.top());
