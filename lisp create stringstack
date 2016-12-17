@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <stack>
+using namespace std;
+// use cpp.sh instead of repl.it
+
+int main() {
+    string example = "( + ( - 8 3 -2 ) ( * 78 2 ) )";
+    cout << "Our example is: " << example << endl;
+  
+    int length = example.length();
+    string holder;
+    int index = 0;
+    
+    stack<string> stringstack;
+    
+    while(index <= length){
+      if(example[index] == ' ' or index == length){
+        stringstack.push(holder);
+        holder.clear();
+        index = index + 1;
+        }
+        
+        else {
+            holder += example[index];
+            index = index + 1;
+        }
+
+        }
+  
+  while(!stringstack.empty()){
+    cout << stringstack.top() << endl;
+    stringstack.pop();
+  }
+}
+    
+
+
