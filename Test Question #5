@@ -1,0 +1,15 @@
+#include <iostream>
+
+strct TreeNode 
+{
+    int info;
+    TreeNode * left, * right;
+    TreeNode(int d, TreeNode * lptr, Treenode * rptr)
+      : info(d), left(lptr), right(rptr)
+    { }
+    
+};
+
+int sumWithPosParent(TreeNode * root, bool countSelf){
+  
+}
