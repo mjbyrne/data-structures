@@ -1,0 +1,68 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+
+struct Node {
+  char info;
+  Node * next;
+  Node(char c, Node * next)
+    : info(c), next(next)
+  {}
+};
+
+/////
+///// Part A
+string reverse(Node * first){
+  Node * location = first;
+  stack <char> mystack;
+  while (location != 0){
+    mystack.push(location->info);
+    location = location->next;
+  }
+  string a;
+  while(!mystack.empty()){
+    a = a + mystack.top();
+    mystack.pop();
+  }
+  return a;
+}
+
+/////
+///// Part B
+void lastToFirst(Node * & first){
+  Node * last;
+  Node * secondToLast = first;
+  while(secondToLast->next->next != nullptr){
+    secondToLast = secondToLast->next;
+  }
+  last = secondToLast->next;
+  secondToLast->next = nullptr;
+  last->next = first;
+  first = last;
+  
+}
+
+int main() {
+  Node * first = new Node('s', new Node('t', new Node('r', new Node('e', new Node('s', new Node('s', new Node('e',new Node('d', nullptr))))))));
+  cout << "When I'm stressed, I have " << reverse(first) << "!" << endl;
+  
+  lastToFirst(first);
+  Node * location = first;
+  while(location != nullptr){
+    cout << location->info;
+    location = location->next;
+  }
+  cout << endl;
+ 
+///// 
+///// Part C
+    Node * first2 = new Node('s', new Node('t', new Node('r', new Node('e', new Node('s', new Node('s', new Node('e',new Node('d', nullptr))))))));
+    for(int i = 0; i < 8; i++){
+      lastToFirst(first2);
+    }
+    cout << reverse(first2) << endl;
+    return 0;
+}
+
+  
