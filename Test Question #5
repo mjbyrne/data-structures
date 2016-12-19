@@ -1,6 +1,6 @@
 #include <iostream>
 
-strct TreeNode 
+struct TreeNode 
 {
     int info;
     TreeNode * left, * right;
@@ -29,4 +29,9 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
   
   return sum;
 
+}
+
+int main(){
+  new TreeNode * root = (5, TreeNode * (2, nullptr, nullptr), TreeNode * (4, nullptr, nullptr);
+  cout << sumWithPosParent(root, true);
 }
