@@ -15,8 +15,8 @@ class Queue
     stack<T> myStack2;
 };
 
-// template<typedef T>
-// Queue<T>::Queue(): myStack1, myStack2(){ }
+ template<class T>
+ Queue<T>::Queue(): myStack1(), myStack2(){ }
 
 template<class T>
 void Queue<T>::enqueue(T element) {
@@ -41,80 +41,18 @@ T Queue<T>::dequeue(){
   
 
 int main() {
-  new Queue<int> q;
-  /*q.enqueue(1);
-  q.enqueue(2);
-  q.enqueue(3);
-  q.enqueue(4);
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  */
-  return 0;
-  
-} 
-
-
-
-
-
-
-
-
-
-
-#include <iostream>
-#include <stack>
-using namespace std;
-
-class Queue 
-{
-  public:
-    Queue();
-    void enqueue(Type element);
-    Type dequeue();
-    
-  private:
-    stack<Type> myStack1;
-    stack<Type> myStack2;
-};
-
-template<class Type>
-Queue<Type>::Queue(): myStack1, myStack2(){ }
-
-template<class Type>
-void Queue<Type>::enqueue(Type element) {
-  myStack1.push(element);
-}
-
-template<class Type>
-Type Queue<Type>::dequeue(){
-  // if mystack2 has anything in it, the top will be the first in queue
-  if(myStack2.empty()){
-    // if mystack2 is empty the bottom of stack one will be next in Queue
-    // have to push all of stack1 into stack2 on at a time and then stack2 will have the queue in order from top to bottom
-    while(!myStack1.empty()){
-      myStack2.push(myStack1.top());
-      myStack1.pop;
-    }
-  }
-  Type retval = myStack2.top();
-  myStack2.pop();
-  return retval;
-}
-  
-
-int main() {
   Queue<int> q;
   q.enqueue(1);
   q.enqueue(2);
   q.enqueue(3);
   q.enqueue(4);
+  q.dequeue();
+  q.enqueue (5);
   cout << q.dequeue()  << endl;
   cout << q.dequeue()  << endl;
   cout << q.dequeue()  << endl;
   cout << q.dequeue()  << endl;
+  
   return 0;
   
 } 
