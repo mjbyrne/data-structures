@@ -12,4 +12,10 @@ strct TreeNode
 
 int sumWithPosParent(TreeNode * root, bool countSelf){
   
+  //base case
+  if(root == nullptr){
+    return 0;
+  }
+  else if ()
+  
 }
