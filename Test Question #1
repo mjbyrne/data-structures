@@ -1,1 +1,15 @@
+The following have side effects:
+
+void changeMe(int * a) {
+  *a = 42;
+}
+
+void changeMe(int & a){
+  a = 42;
+}
+
+void changeMe(int * a){
+  int * b = a;
+  *b = 42;
+}
 
