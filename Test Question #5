@@ -19,7 +19,7 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
     return 0;
   }
 
-  int sum;
+  int sum = 0; 
   
   if(countSelf){
     sum += root->info;
@@ -28,9 +28,9 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
   sum += sumWithPosParent(root->left, root->info > 0);
   sum += sumWithPosParent(root->right, root->info > 0);
   
-  cout << root->info << "\n";
-  cout << sum << "\n";
-  cout << "\n";
+  //cout << root->info << "\n";
+  //cout << sum << "\n";
+  //cout << "\n";
   return sum;
 
 }
@@ -39,5 +39,6 @@ int main(){
   TreeNode * child1 = new TreeNode(2, nullptr, nullptr);
   TreeNode * child2 = new TreeNode(4, nullptr, nullptr);
   TreeNode * root = new TreeNode(5, child1, child2);
-  cout << sumWithPosParent(root, true);
+  cout << sumWithPosParent(root, false) << endl << endl << endl << endl;
+  cout << sumWithPosParent(root, true) << endl;
 }
