@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 #include <stack>
 using namespace std;
@@ -19,9 +18,14 @@ int main() {
     while(index <= length){
          
         if (example[index] == ' ' or index == length){
-        stringstack.push(holder);
-        holder.clear();
-        index = index + 1;
+            if(holder == ""){
+                index = index + 1;
+            }
+            else{
+                stringstack.push(holder);
+            holder.clear();
+            index = index + 1;
+            }
         }
         
         else {
