@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <stack>
 using namespace std;
@@ -50,8 +51,7 @@ int main() {
                     }
                     stringstack.pop(); // gets rid of operator we just used
                     stringstack.pop(); // gets rid of the ( that we no longer need
-                    stringstack.push(to_string(total));
-                    index = index + 1;            
+                    stringstack.push(to_string(total));            
                 }
 
                 else if(stringstack.top() == "-"){
@@ -64,7 +64,6 @@ int main() {
                     stringstack.pop(); // gets rid of operator we just used
                     stringstack.pop(); // gets rid of the ( that we no longer need
                     stringstack.push(to_string(total));
-                    index = index + 1;            
                 }
 
 
@@ -78,7 +77,6 @@ int main() {
                     stringstack.pop(); // gets rid of operator we just used
                     stringstack.pop(); // gets rid of the ( that we no longer need
                     stringstack.push(to_string(total));
-                    index = index + 1;            
                 }
 
 
@@ -92,16 +90,12 @@ int main() {
                     stringstack.pop(); // gets rid of operator we just used
                     stringstack.pop(); // gets rid of the ( that we no longer need
                     stringstack.push(to_string(total));
-                    index = index + 1;
                 }
     
             }
 
         }
     }
+    
     cout <<  stringstack.top();
-}
-
-
-
 }
