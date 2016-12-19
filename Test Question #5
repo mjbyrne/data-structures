@@ -16,9 +16,9 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
   if(root == nullptr){
     return 0;
   }
-  else if (root > 0){
-    sum = sumWithPosParent(root->left, root->int >0);
-  }
-  else
+
+    sum = sumWithPosParent(root->left, root->int >0 );
+    sum = sumWithPosParent(root->right, root->int > 0)
   
+
 }
