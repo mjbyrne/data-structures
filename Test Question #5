@@ -4,7 +4,7 @@ struct TreeNode
 {
     int info;
     TreeNode * left, * right;
-    TreeNode(int d, TreeNode * lptr, Treenode * rptr)
+    TreeNode(int d, TreeNode * lptr, TreeNode * rptr)
       : info(d), left(lptr), right(rptr)
     { }
     
@@ -20,11 +20,11 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
   int sum;
   
   if(countSelf){
-    sum = sum + root->int;
+    sum += root->info;
   }
   
-  sum = sum + sumWithPosParent(root->left, root->int > 0);
-  sum = sum + sumWithPosParent(root->right, root->int > 0)
+  sum += sumWithPosParent(root->left, root->info > 0);
+  sum += sumWithPosParent(root->right, root->info > 0);
   
   
   return sum;
@@ -32,6 +32,6 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
 }
 
 int main(){
-  new TreeNode * root = (5, TreeNode * (2, nullptr, nullptr), TreeNode * (4, nullptr, nullptr);
+  new TreeNode * root = {5, (2, nullptr, nullptr), (4, nullptr, nullptr)};
   cout << sumWithPosParent(root, true);
 }
