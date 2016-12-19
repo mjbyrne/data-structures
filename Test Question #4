@@ -2,6 +2,75 @@
 #include <stack>
 using namespace std;
 
+template<typedef T>
+class Queue 
+{
+  public:
+    Queue();
+    void enqueue(T element);
+    T dequeue();
+    
+  private:
+    stack<T> myStack1;
+    stack<T> myStack2;
+};
+
+template<typedef T>
+Queue<T>::Queue(): myStack1, myStack2(){ }
+
+template<typedef T>
+void Queue<T>::enqueue(T element) {
+  myStack1.push(element);
+}
+
+template<typedef T>
+T Queue<T>::dequeue(){
+  // if mystack2 has anything in it, the top will be the first in queue
+  if(myStack2.empty()){
+    // if mystack2 is empty the bottom of stack one will be next in Queue
+    // have to push all of stack1 into stack2 on at a time and then stack2 will have the queue in order from top to bottom
+    while(!myStack1.empty()){
+      myStack2.push(myStack1.top());
+      myStack1.pop;
+    }
+  }
+  T retval = myStack2.top();
+  myStack2.pop();
+  return retval;
+}
+  
+
+int main() {
+  Queue<int> q;
+  q.enqueue(1);
+  q.enqueue(2);
+  q.enqueue(3);
+  q.enqueue(4);
+  cout << q.dequeue()  << endl;
+  cout << q.dequeue()  << endl;
+  cout << q.dequeue()  << endl;
+  cout << q.dequeue()  << endl;
+  return 0;
+  
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
 class Queue 
 {
   public:
@@ -34,72 +103,6 @@ Type Queue<Type>::dequeue(){
     }
   }
   Type retval = myStack2.top();
-  myStack2.pop();
-  return retval;
-}
-  
-
-int main() {
-  Queue<int> q;
-  q.enqueue(1);
-  q.enqueue(2);
-  q.enqueue(3);
-  q.enqueue(4);
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  cout << q.dequeue()  << endl;
-  return 0;
-  
-} 
-
-
-
-
-
-
-
-
-
-
-
-
-#include <iostream>
-#include <stack>
-using namespace std;
-
-class Queue 
-{
-  public:
-    Queue();
-    void enqueue(T element);
-    T dequeue();
-    
-  private:
-    stack<T> myStack1;
-    stack<T> myStack2;
-};
-
-template<template T>
-Queue<T>::Queue(): myStack1, myStack2(){ }
-
-template<template T>
-void Queue<T>::enqueue(T element) {
-  myStack1.push(element);
-}
-
-template<template T>
-T Queue<T>::dequeue(){
-  // if mystack2 has anything in it, the top will be the first in queue
-  if(myStack2.empty()){
-    // if mystack2 is empty the bottom of stack one will be next in Queue
-    // have to push all of stack1 into stack2 on at a time and then stack2 will have the queue in order from top to bottom
-    while(!myStack1.empty()){
-      myStack2.push(myStack1.top());
-      myStack1.pop;
-    }
-  }
-  T retval = myStack2.top();
   myStack2.pop();
   return retval;
 }
