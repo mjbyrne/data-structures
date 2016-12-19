@@ -1,4 +1,6 @@
 #include <iostream>
+using namespace std;
+
 
 struct TreeNode 
 {
@@ -34,6 +36,6 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
 int main(){
   TreeNode * child1 = new TreeNode(2, nullptr, nullptr);
   TreeNode * child2 = new TreeNode(4, nullptr, nullptr);
-  TreeNode * root = TreeNode(5, child1, child2);
+  TreeNode * root = new TreeNode(5, child1, child2);
   cout << sumWithPosParent(root, true);
 }
