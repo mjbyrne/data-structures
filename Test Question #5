@@ -17,8 +17,16 @@ int sumWithPosParent(TreeNode * root, bool countSelf){
     return 0;
   }
 
-    sum = sumWithPosParent(root->left, root->int >0 );
-    sum = sumWithPosParent(root->right, root->int > 0)
+  int sum;
   
+  if(countSelf){
+    sum = sum + root->int;
+  }
+  
+  sum = sum + sumWithPosParent(root->left, root->int > 0);
+  sum = sum + sumWithPosParent(root->right, root->int > 0)
+  
+  
+  return sum;
 
 }
