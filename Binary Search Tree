@@ -27,11 +27,35 @@ TreeNode * createTree() {
     return root;
 }
 
-void printAlphabetical(TreeNode * BSTRoot)
-{
-  if(root == nullptr){
-    return 0
+vector<string> getAllInfo(TreeNode * BSTRoot, vector<string> & stringlist){
+  if(BSTRoot == nullptr){
+    return stringlist;
   }
+  
+  else{
+    
+    stringlist.push_back(BSTRoot->info);
+  
+    getAllInfo(BSTRoot->left, stringlist);
+    getAllInfo(BSTRoot->right, stringlist);
+    
+    return stringlist;
+  }  
+}
+
+
+void printAlphabetical(TreeNode * BSTRoot){
+  
+  vector<string> stringlist = {};
+  vector<string> unsorted = getAllInfo(BSTRoot, stringlist);
+  
+  sort(unsorted.begin(), unsorted.end());
+  int index = 0;
+  while(index < unsorted.size()){
+    cout << unsorted[index] << endl;
+    index += 1;
+  }
+    
   
      //precondition: BSTRoot is pointer to root of Binary Search Tree
      //postcondition: prints values in order
