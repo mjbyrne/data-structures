@@ -1,4 +1,3 @@
-
 #include <iostream> 
 #include <vector> 
 #include "stdlib.h"
@@ -37,7 +36,27 @@ class Quiz {
   
   private:     
     vector<Question> myQuestions;
-}; 
+};
+
+
+int mathQuestion(string myAnswer, string answer){
+  int points = 0;
+  if (atof(answer.c_str()) == atof(myAnswer.c_str())){
+    points = 1;
+  }
+  return points;
+}
+
+
+int geographyQuestion(string myAnswer, string answer){
+  int points = 0;
+  if (lower(myAnswer) == lower(answer)){
+    points = 1;
+  }
+  return points;
+}
+
+
 double Quiz::askQuestions() {   
   int correct = 0;   
   bool isCorrect;   
@@ -45,25 +64,19 @@ double Quiz::askQuestions() {
     for(int i = 0; i < myQuestions.size(); i++) {     
       cout << myQuestions[i].getQuestion();
       cin >> answer; 
-      if(myQuestions[i].getType() == "math") { 
-        isCorrect = ( atof(answer.c_str()) == atof(myQuestions[i].getAnswer().c_str()) );
-        } 
-      else {
-        isCorrect = (lower(myQuestions[i].getAnswer()) == lower(answer));
-      } 
       
-      if(isCorrect) { 
-        correct++; 
-        cout << "Correct!" << endl;
+      if(myQuestions[i].getType() == "math") { 
+        correct += mathQuestion(myQuestions[i].getAnswer(), answer);
       }
       
-      else { 
-        cout << "Incorrect!" << endl; 
-      }  
+      else if(myQuestions[i].getType() == "geography"){
+        correct += geographyQuestion(myQuestions[i].getAnswer(), answer);
+      }
       
     }
     return correct*100.0/myQuestions.size();
   }
+
 
 int main() {  
   Question q1("What is 2 + 2?", "4", "math");
