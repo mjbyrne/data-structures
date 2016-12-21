@@ -1,3 +1,4 @@
+// Part A
 The following have side effects:
 
 void changeMe(int * a) {
@@ -13,3 +14,6 @@ void changeMe(int * a){
   *b = 42;
 }
 
+// Part B
+
+The answer would be 1 since you are dividing the length of a pointer by the length of a pointer. 
