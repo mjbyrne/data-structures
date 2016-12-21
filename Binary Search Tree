@@ -1,0 +1,99 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+struct TreeNode
+{
+    string info;
+    TreeNode * left, * right;
+    TreeNode(const string& s, TreeNode * lptr, TreeNode * rptr)
+       : info(s), left(lptr), right(rptr)
+    { }
+};
+
+typedef TreeNode * Tree;
+
+TreeNode * createTree() {
+	TreeNode * jaguar = new TreeNode("jaguar",   new TreeNode("hippo", 0, 0),
+	                                             new TreeNode("leopard", 0, 0));
+	TreeNode * giraffe = new TreeNode("giraffe", new TreeNode("elephant", 0, 0),
+	                                             jaguar);
+	TreeNode * monkey = new TreeNode("monkey", 0, new TreeNode("pig", 0, 0));
+	TreeNode * tiger = new TreeNode("tiger", monkey, 0);
+    TreeNode * root = new TreeNode("llama", giraffe, tiger);
+    
+    return root;
+}
+
+void printAlphabetical(TreeNode * BSTRoot)
+{
+  if(root == nullptr){
+    return 0
+  }
+  
+     //precondition: BSTRoot is pointer to root of Binary Search Tree
+     //postcondition: prints values in order
+}
+ 
+int sumOfLengths(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns sum of the lengths of all strings in tree
+}
+ 
+int maxOfLengths(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns max of the lengths of all strings in tree
+}
+ 
+int treeHeight(TreeNode * root) {
+    // precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns number of levels
+}
+ 
+int sumOfLengthsOnLevel(TreeNode * root, int level) {
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns sum of lengths of all strings in tree on level level
+}
+ 
+int numOfLeaves(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns number of leaves in tree
+}
+ 
+void insert(TreeNode * BSTRoot, const string& str)
+{
+     //precondition: BSTRoot is pointer to root of Binary Search Tree;
+     //              str is a string
+     //postcondition: inserts str in proper place in binary search tree
+}
+ 
+int numOfNodes(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns number of nodes in tree
+}
+ 
+void find(TreeNode * BSTRoot, const string& str)
+{
+     //precondition: BSTRoot is pointer to root of Binary Search Tree of strings; 
+     //              str is a string
+     //postcondition: returns index of str in tree (e.g., 0 for 1st alphabetical, 1 for second, etc.) or -1 if it's not found
+}
+ 
+void destroyTree(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: destroys all nodes in tree
+}
+ 
+bool isBalanced(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns true exactly when tree is height-balanced
+ 	//                (i.e., left and right subtrees are height-balanced and
+ 	//                 their heights differ by at most 1)
+}
+
+int main() {
+	TreeNode * root = createTree();
+	printAlphabetical(root);
+}
