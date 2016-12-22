@@ -47,6 +47,25 @@ vector<string> getAllInfo(TreeNode * BSTRoot, vector<string> & stringlist){
 
 
 
+vector<string> getAllInfoAtLevel(TreeNode * root, vector<string> & stringlist, int currentLevel, int desiredLevel){
+  if(currentLevel == desiredLevel){
+    stringlist.push_back(root->info);
+    return stringlist;
+  }
+  
+  else {
+    if(root->left != nullptr){
+      getAllInfoAtLevel(root->left, stringlist, currentLevel + 1, desiredLevel);
+    }
+    if(root->right != nullptr){
+      getAllInfoAtLevel(root->right, stringlist, currentLevel + 1, desiredLevel);
+    }
+    return stringlist;
+  }
+  
+}
+
+
 void printAlphabetical(TreeNode * BSTRoot){
   
   vector<string> stringlist = {};
@@ -105,12 +124,23 @@ int treeHeight(TreeNode * root) {
     return 1 + max(treeHeight(root->left), treeHeight(root->right));
   }
 
-
   // precondition: root is a pointer to root of tree of strings
  	// postcondition: returns number of levels
 }
  
 int sumOfLengthsOnLevel(TreeNode * root, int level) {
+  
+  vector<string> stringlist = {};
+  vector<string> stringlistfromlevel = getAllInfoAtLevel(root, stringlist, 0, level);
+  
+  int index = 0;
+  int levelSum = 0;
+  while(index < stringlistfromlevel.size()){
+    levelSum += stringlistfromlevel[index].length();
+    index +=1;
+  }
+  return levelSum;
+  
  	// precondition: root is a pointer to root of tree of strings
  	// postcondition: returns sum of lengths of all strings in tree on level level
 }
@@ -156,8 +186,10 @@ int main() {
 	printAlphabetical(root);
 	cout << "The sum of the lengths is: " << sumOfLengths(root) << endl;
 	cout << "The longest entry is " << maxOfLengths(root) << " characters" << endl;
-   cout << "The tree has " << treeHeight(root) << " levels." << endl;
+  cout << "The tree has " << treeHeight(root) << " levels." << endl;
+  cout << "The total length of entries at level 2 is: " << sumOfLengthsOnLevel(root, 2) << endl;
 }
+
 
 
 
