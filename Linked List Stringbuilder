@@ -18,12 +18,26 @@ struct Node {
 
 typedef Node * LinkedList;
 
+
 void insertAfter(Node * nodeInList, Node * insertNode) {
-	
+  insertNode->next = nodeInList->next;
+  nodeInList->next = insertNode;
 }
 
+
 void deleteAfter(Node * nodeInList) {
-	
+  
+  Node * location = nodeInList;
+  while(nodeInList->next != nullptr){
+    while(location->next != nullptr){
+      location = location->next;
+    }
+    delete location;
+    location = nodeInList;
+  }
+  
+	//nodeInList->next = nullptr;
+	//memory leak
 }
 
 bool isEmpty(LinkedList lst) {
