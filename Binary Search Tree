@@ -27,6 +27,8 @@ TreeNode * createTree() {
     return root;
 }
 
+
+
 vector<string> getAllInfo(TreeNode * BSTRoot, vector<string> & stringlist){
   if(BSTRoot == nullptr){
     return stringlist;
@@ -44,24 +46,35 @@ vector<string> getAllInfo(TreeNode * BSTRoot, vector<string> & stringlist){
 }
 
 
+
 void printAlphabetical(TreeNode * BSTRoot){
   
   vector<string> stringlist = {};
-  vector<string> unsorted = getAllInfo(BSTRoot, stringlist);
+  vector<string> sorting = getAllInfo(BSTRoot, stringlist);
   
-  sort(unsorted.begin(), unsorted.end());
+  sort(sorting.begin(), sorting.end());
   int index = 0;
-  while(index < unsorted.size()){
-    cout << unsorted[index] << endl;
+  cout << "The tree entries in alphabetical order are:" << endl;
+  while(index < sorting.size()){
+    cout << sorting[index] << endl;
     index += 1;
   }
-    
-  
+  stringlist = {};
      //precondition: BSTRoot is pointer to root of Binary Search Tree
      //postcondition: prints values in order
 }
  
 int sumOfLengths(TreeNode * root) {
+  vector<string> stringlist = {};
+  vector<string> allStrings = getAllInfo(root, stringlist);
+  int index = 0;
+  int sum = 0;
+  while(index < allStrings.size()){
+    sum += allStrings[index].length();
+    index += 1;
+  }
+  return sum;
+  
  	// precondition: root is a pointer to root of tree of strings
  	// postcondition: returns sum of the lengths of all strings in tree
 }
@@ -120,4 +133,9 @@ bool isBalanced(TreeNode * root) {
 int main() {
 	TreeNode * root = createTree();
 	printAlphabetical(root);
+	cout << "The sum of the lengths is: " << sumOfLengths(root) << endl;
 }
+
+
+
+
