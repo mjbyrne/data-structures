@@ -1,44 +1,211 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
 using namespace std;
 
-
-struct TreeNode 
+struct TreeNode
 {
-    int info;
+    string info;
     TreeNode * left, * right;
-    TreeNode(int d, TreeNode * lptr, TreeNode * rptr)
-      : info(d), left(lptr), right(rptr)
+    TreeNode(const string& s, TreeNode * lptr, TreeNode * rptr)
+       : info(s), left(lptr), right(rptr)
     { }
-    
 };
 
-int sumWithPosParent(TreeNode * root, bool countSelf){
+typedef TreeNode * Tree;
+
+TreeNode * createTree() {
+	TreeNode * jaguar = new TreeNode("jaguar",   new TreeNode("hippo", 0, 0),
+	                                             new TreeNode("leopard", 0, 0));
+	TreeNode * giraffe = new TreeNode("giraffe", new TreeNode("elephant", 0, 0),
+	                                             jaguar);
+	TreeNode * monkey = new TreeNode("monkey", 0, new TreeNode("pig", 0, 0));
+	TreeNode * tiger = new TreeNode("tiger", monkey, 0);
+    TreeNode * root = new TreeNode("llama", giraffe, tiger);
+    
+    return root;
+}
+
+
+
+vector<string> getAllInfo(TreeNode * BSTRoot, vector<string> & stringlist){
+  if(BSTRoot == nullptr){
+    return stringlist;
+  }
   
-  //base case
+  else{
+    
+    stringlist.push_back(BSTRoot->info);
+  
+    getAllInfo(BSTRoot->left, stringlist);
+    getAllInfo(BSTRoot->right, stringlist);
+    
+    return stringlist;
+  }  
+}
+
+
+
+vector<string> getAllInfoAtLevel(TreeNode * root, vector<string> & stringlist, int currentLevel, int desiredLevel){
+  if(currentLevel == desiredLevel){
+    stringlist.push_back(root->info);
+    return stringlist;
+  }
+  
+  else {
+    if(root->left != nullptr){
+      getAllInfoAtLevel(root->left, stringlist, currentLevel + 1, desiredLevel);
+    }
+    if(root->right != nullptr){
+      getAllInfoAtLevel(root->right, stringlist, currentLevel + 1, desiredLevel);
+    }
+    return stringlist;
+  }
+  
+}
+
+
+void printAlphabetical(TreeNode * BSTRoot){
+  
+  vector<string> stringlist = {};
+  vector<string> sorting = getAllInfo(BSTRoot, stringlist);
+  
+  sort(sorting.begin(), sorting.end());
+  int index = 0;
+  cout << "The tree entries in alphabetical order are:" << endl;
+  while(index < sorting.size()){
+    cout << sorting[index] << endl;
+    index += 1;
+  }
+  stringlist = {};
+     //precondition: BSTRoot is pointer to root of Binary Search Tree
+     //postcondition: prints values in order
+}
+ 
+int sumOfLengths(TreeNode * root) {
+  vector<string> stringlist = {};
+  vector<string> allStrings = getAllInfo(root, stringlist);
+  int index = 0;
+  int sum = 0;
+  while(index < allStrings.size()){
+    sum += allStrings[index].length();
+    index += 1;
+  }
+  return sum;
+  
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns sum of the lengths of all strings in tree
+}
+ 
+int maxOfLengths(TreeNode * root) {
+  
+  vector<string> stringlist = {};
+  vector<string> allStrings = getAllInfo(root, stringlist);
+  int index = 0;
+  int maxLength = 0;
+  while(index < allStrings.size()){
+    if (allStrings[index].length() > maxLength){
+      maxLength = allStrings[index].length();
+    }
+    index +=1;
+  }
+  return maxLength;
+    
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns max of the lengths of all strings in tree
+}
+ 
+int treeHeight(TreeNode * root) {
+  if (root == nullptr){
+    return 0;
+  }
+  else {
+    return 1 + max(treeHeight(root->left), treeHeight(root->right));
+  }
+
+  // precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns number of levels
+}
+ 
+int sumOfLengthsOnLevel(TreeNode * root, int level) {
+  
+  vector<string> stringlist = {};
+  vector<string> stringlistfromlevel = getAllInfoAtLevel(root, stringlist, 0, level);
+  
+  int index = 0;
+  int levelSum = 0;
+  while(index < stringlistfromlevel.size()){
+    levelSum += stringlistfromlevel[index].length();
+    index +=1;
+  }
+  return levelSum;
+  
+ 	// precondition: root is a pointer to root of tree of strings
+ 	// postcondition: returns sum of lengths of all strings in tree on level level
+}
+ 
+int numOfLeaves(TreeNode * root) {
+  
+  int leavesSoFar = 0;
   if(root == nullptr){
     return 0;
   }
-
-  int sum = 0; 
-  
-  if(countSelf){
-    sum += root->info;
+  else if(root->left == nullptr and root->right == nullptr){
+    return 1;
+  }
+  else{
+    leavesSoFar += numOfLeaves(root->left);
+    leavesSoFar += numOfLeaves(root->right);
+    return leavesSoFar;
   }
   
-  sum += sumWithPosParent(root->left, root->info > 0);
-  sum += sumWithPosParent(root->right, root->info > 0);
   
-  //cout << root->info << "\n";
-  //cout << sum << "\n";
-  //cout << "\n";
-  return sum;
-
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns number of leaves in tree
+}
+ 
+void insert(TreeNode * BSTRoot, const string& str)
+{
+     //precondition: BSTRoot is pointer to root of Binary Search Tree;
+     //              str is a string
+     //postcondition: inserts str in proper place in binary search tree
+}
+ 
+int numOfNodes(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns number of nodes in tree
+}
+ 
+void find(TreeNode * BSTRoot, const string& str)
+{
+     //precondition: BSTRoot is pointer to root of Binary Search Tree of strings; 
+     //              str is a string
+     //postcondition: returns index of str in tree (e.g., 0 for 1st alphabetical, 1 for second, etc.) or -1 if it's not found
+}
+ 
+void destroyTree(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: destroys all nodes in tree
+}
+ 
+bool isBalanced(TreeNode * root) {
+ 	// precondition: root is a pointer to root of tree
+ 	// postcondition: returns true exactly when tree is height-balanced
+ 	//                (i.e., left and right subtrees are height-balanced and
+ 	//                 their heights differ by at most 1)
 }
 
-int main(){
-  TreeNode * child1 = new TreeNode(2, nullptr, nullptr);
-  TreeNode * child2 = new TreeNode(4, nullptr, nullptr);
-  TreeNode * root = new TreeNode(5, child1, child2);
-  cout << sumWithPosParent(root, false) << endl << endl << endl << endl;
-  cout << sumWithPosParent(root, true) << endl;
+int main() {
+	TreeNode * root = createTree();
+	printAlphabetical(root);
+	cout << "The sum of the lengths is: " << sumOfLengths(root) << endl;
+	cout << "The longest entry is " << maxOfLengths(root) << " characters" << endl;
+  cout << "The tree has " << treeHeight(root) << " levels." << endl;
+  cout << "The total length of entries at level 2 is: " << sumOfLengthsOnLevel(root, 2) << endl;
+  cout << "There are " << numOfLeaves(root) << " leaves in this tree." << endl;
 }
+
+
+
+
