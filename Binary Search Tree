@@ -166,8 +166,24 @@ int numOfLeaves(TreeNode * root) {
  	// postcondition: returns number of leaves in tree
 }
  
-void insert(TreeNode * BSTRoot, const string& str)
-{
+TreeNode * insert(TreeNode * BSTRoot, const string& str){
+
+   vector<string> sortToCompare = {str, BSTRoot->info};
+   sort(sortToCompare.begin(), sortToCompare.end());
+  
+  if (BSTRoot == nullptr){
+     BSTRoot = new TreeNode(str, nullptr, nullptr);
+  }
+  else if(sortToCompare[0] == str){
+    BSTRoot->left = insert(BSTRoot->left, str);
+  }  
+  else if(sortToCompare[1] == str){
+    BSTRoot->right = insert(BSTRoot->right, str);
+  } 
+
+     
+  
+  
      //precondition: BSTRoot is pointer to root of Binary Search Tree;
      //              str is a string
      //postcondition: inserts str in proper place in binary search tree
@@ -269,7 +285,4 @@ int main() {
   destroyTree(root);
   
 }
-
-
-
 
