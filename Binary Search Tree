@@ -2,6 +2,7 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <cstdlib>
 using namespace std;
 
 struct TreeNode
@@ -231,6 +232,22 @@ void destroyTree(TreeNode * root) {
 }
  
 bool isBalanced(TreeNode * root) {
+  int heightLeft;
+  int heightRight;
+  
+  if(root == nullptr){
+    return true;
+  }
+  
+  heightLeft = treeHeight(root->left);
+  heightRight = treeHeight(root->right);
+   
+   if(abs(heightLeft - heightRight) <= 1 and isBalanced(root->left) and isBalanced(root->right)){
+     return true;
+   }
+   else{
+     return false;
+   }
  	// precondition: root is a pointer to root of tree
  	// postcondition: returns true exactly when tree is height-balanced
  	//                (i.e., left and right subtrees are height-balanced and
@@ -248,6 +265,9 @@ int main() {
   cout << "There are " << numOfNodes(root) << " nodes in this tree." << endl;
   cout << "elephant can be found at location " << find(root, "elephant") << endl;
   cout << "monkey can be found at location " << find(root, "monkey") << endl;
+  cout << "Is this tree balanced? (1 == true and 0 == false) A: " << isBalanced(root) << endl;
+  destroyTree(root);
+  
 }
 
 
