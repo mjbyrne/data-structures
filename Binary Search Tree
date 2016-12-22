@@ -146,6 +146,21 @@ int sumOfLengthsOnLevel(TreeNode * root, int level) {
 }
  
 int numOfLeaves(TreeNode * root) {
+  
+  int leavesSoFar = 0;
+  if(root == nullptr){
+    return 0;
+  }
+  else if(root->left == nullptr and root->right == nullptr){
+    return 1;
+  }
+  else{
+    leavesSoFar += numOfLeaves(root->left);
+    leavesSoFar += numOfLeaves(root->right);
+    return leavesSoFar;
+  }
+  
+  
  	// precondition: root is a pointer to root of tree
  	// postcondition: returns number of leaves in tree
 }
@@ -157,8 +172,21 @@ void insert(TreeNode * BSTRoot, const string& str)
      //postcondition: inserts str in proper place in binary search tree
 }
  
+ 
 int numOfNodes(TreeNode * root) {
- 	// precondition: root is a pointer to root of tree
+  int nodesSoFar = 0;
+  if(root == nullptr){
+    return 0;
+  }
+  else{
+    nodesSoFar += 1;
+    nodesSoFar += numOfNodes(root->left);
+    nodesSoFar += numOfNodes(root->right);
+    return nodesSoFar;
+  }
+  
+  
+  	// precondition: root is a pointer to root of tree
  	// postcondition: returns number of nodes in tree
 }
  
@@ -188,6 +216,8 @@ int main() {
 	cout << "The longest entry is " << maxOfLengths(root) << " characters" << endl;
   cout << "The tree has " << treeHeight(root) << " levels." << endl;
   cout << "The total length of entries at level 2 is: " << sumOfLengthsOnLevel(root, 2) << endl;
+  cout << "There are " << numOfLeaves(root) << " leaves in this tree." << endl;
+  cout << "There are " << numOfNodes(root) << " nodes in this tree." << endl;
 }
 
 
