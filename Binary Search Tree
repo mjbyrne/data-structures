@@ -98,7 +98,15 @@ int maxOfLengths(TreeNode * root) {
 }
  
 int treeHeight(TreeNode * root) {
-    // precondition: root is a pointer to root of tree of strings
+  if (root == nullptr){
+    return 0;
+  }
+  else {
+    return 1 + max(treeHeight(root->left), treeHeight(root->right));
+  }
+
+
+  // precondition: root is a pointer to root of tree of strings
  	// postcondition: returns number of levels
 }
  
@@ -147,6 +155,9 @@ int main() {
 	TreeNode * root = createTree();
 	printAlphabetical(root);
 	cout << "The sum of the lengths is: " << sumOfLengths(root) << endl;
-	cout << "The longest entry is: " << maxOfLengths(root) << " characters" << endl;
+	cout << "The longest entry is " << maxOfLengths(root) << " characters" << endl;
+   cout << "The tree has " << treeHeight(root) << " levels." << endl;
 }
+
+
 
