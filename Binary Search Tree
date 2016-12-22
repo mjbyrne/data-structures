@@ -80,6 +80,19 @@ int sumOfLengths(TreeNode * root) {
 }
  
 int maxOfLengths(TreeNode * root) {
+  
+  vector<string> stringlist = {};
+  vector<string> allStrings = getAllInfo(root, stringlist);
+  int index = 0;
+  int maxLength = 0;
+  while(index < allStrings.size()){
+    if (allStrings[index].length() > maxLength){
+      maxLength = allStrings[index].length();
+    }
+    index +=1;
+  }
+  return maxLength;
+    
  	// precondition: root is a pointer to root of tree of strings
  	// postcondition: returns max of the lengths of all strings in tree
 }
@@ -134,8 +147,6 @@ int main() {
 	TreeNode * root = createTree();
 	printAlphabetical(root);
 	cout << "The sum of the lengths is: " << sumOfLengths(root) << endl;
+	cout << "The longest entry is: " << maxOfLengths(root) << " characters" << endl;
 }
-
-
-
 
