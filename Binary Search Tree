@@ -170,6 +170,8 @@ void insert(TreeNode * BSTRoot, const string& str)
      //precondition: BSTRoot is pointer to root of Binary Search Tree;
      //              str is a string
      //postcondition: inserts str in proper place in binary search tree
+     // WHAT IS THE PROPPER PLACE?
+     // WE HAVE NOT ORGANIZED THE TREE IN ANY PARTICULAR ORDER SO FAR
 }
  
  
@@ -210,6 +212,20 @@ int find(TreeNode * BSTRoot, const string& str){
 }
  
 void destroyTree(TreeNode * root) {
+  
+  if (root == nullptr){
+    
+  }
+  else if (root->left == nullptr and root->right == nullptr){
+    delete root;
+  }
+  else{
+    destroyTree(root->left);
+    destroyTree(root->right);
+    delete root;
+  }
+  
+  
  	// precondition: root is a pointer to root of tree
  	// postcondition: destroys all nodes in tree
 }
