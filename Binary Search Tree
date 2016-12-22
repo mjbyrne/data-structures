@@ -190,8 +190,20 @@ int numOfNodes(TreeNode * root) {
  	// postcondition: returns number of nodes in tree
 }
  
-void find(TreeNode * BSTRoot, const string& str)
-{
+int find(TreeNode * BSTRoot, const string& str){
+  vector<string> stringlist = {};
+  vector<string> allStrings = getAllInfo(BSTRoot, stringlist);
+  sort(allStrings.begin(), allStrings.end());
+  int index = 0;
+  int location = -1;
+  while(index < allStrings.size()){
+    if(str.compare(allStrings[index]) == 0){
+      location = index;
+    }
+    index += 1;
+  }
+  return location;
+  
      //precondition: BSTRoot is pointer to root of Binary Search Tree of strings; 
      //              str is a string
      //postcondition: returns index of str in tree (e.g., 0 for 1st alphabetical, 1 for second, etc.) or -1 if it's not found
@@ -218,6 +230,8 @@ int main() {
   cout << "The total length of entries at level 2 is: " << sumOfLengthsOnLevel(root, 2) << endl;
   cout << "There are " << numOfLeaves(root) << " leaves in this tree." << endl;
   cout << "There are " << numOfNodes(root) << " nodes in this tree." << endl;
+  cout << "elephant can be found at location " << find(root, "elephant") << endl;
+  cout << "monkey can be found at location " << find(root, "monkey") << endl;
 }
 
 
