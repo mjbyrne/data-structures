@@ -206,7 +206,7 @@ int StringBuilder::length() const {
 string StringBuilder::toString() const {
 	// forms and returns a string from the list of Nodes, concatenating the strings
 	// that each Node represent in order from the beginning to the end
-	return substring(0, length() - 1)
+	return substring(0, length() - 1);
 }
 
 void StringBuilder::append(string str) {
@@ -228,8 +228,25 @@ void StringBuilder::deleteChars(int start) {
 }
 
 void StringBuilder::insert(int offset, const string str) {
+  stringParts.push_back(str);
+  Node * nodeToInsert = new Node(0, str.length() -1, stringParts.size() -1);
+  Node * location = positions;
+  int indexInNode = offset;
+  while(indexInNode > location->endPos - location->startPos + 1){
+    indexInNode = indexInNode - (location->endPos - location->startPos + 1);
+    location = location->next;
+  }
+
+  Node * rightOfInsert = new Node(indexInNode, location->endPos, location->stringIndex);
+  nodeToInsert->next = rightOfInsert;  
+  rightOfInsert->next = location->next;
+  
+  location->endPos = indexInNode -1;
+  location->next = nodeToInsert;
+
 	// inserts str after offset characters
 }
+
 
 void StringBuilder::reverse() {
 	// reverses the string that this represents
@@ -246,7 +263,7 @@ void StringBuilder::replace(const string sub, const string replaceStr) {
 StringBuilder::~StringBuilder() {
   Node * location = positions;
   while(location != nullptr){
-    while(location-> != nullptr){
+    while(location != nullptr){
       location = location->next;
     }
   delete location;
