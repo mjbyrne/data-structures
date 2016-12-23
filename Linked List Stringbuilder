@@ -249,8 +249,10 @@ void StringBuilder::deleteChars(int start, int end) {
 
 void StringBuilder::deleteChars(int start) {
 	// removes the characters from start to the end of this string
-	
+	deleteChars(start, length() -1);
 }
+
+
 
 void StringBuilder::insert(int offset, const string str) {
   stringParts.push_back(str);
