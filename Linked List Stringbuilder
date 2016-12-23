@@ -280,7 +280,12 @@ void StringBuilder::reverse() {
 }
 
 void StringBuilder::replace(const string sub, const string replaceStr) {
-  while(indexOf(replaceStr, 0) != -1){
+  int indexOfFirstInstance = indexOf(replaceStr, 0);
+  
+  while(indexOfFirstInstance != -1){
+    deleteChars(indexOfFirstInstance, indexOfFirstInstance + replaceStr.length() -1);
+    insert(indexOfFirstInstance-1, replaceStr);
+    indexOfFirstInstance = indexOf(replaceStr, 0);
     
   }
   
