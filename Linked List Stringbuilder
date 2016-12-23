@@ -114,7 +114,7 @@ string StringBuilder::substring(int start) const {
   string tempString = "";
   Node * location = positions;
   
-  int stringLength = start;
+  int stringLength = 0;
   while(location!=nullptr){
     stringLength  +=(location->endPos - location->startPos + 1); //#of chars in node
     location = location->next;
@@ -125,12 +125,45 @@ string StringBuilder::substring(int start) const {
 	// returns the substring from start index to the end of the string
 }
 
-int StringBuilder::indexOf(const string &needle, int startPos) const {
+int StringBuilder::indexOf(const string &needle, int startLookingHere) const {
+  Node * location = positions;
+  int stringLength = 0;
+  while(location!=nullptr){
+    stringLength  +=(location->endPos - location->startPos + 1); //#of chars in node
+    location = location->next;
+  }
+
+  
+  if (startLookingHere >= stringLength){
+    return -1;
+  }
+  else{
+    int lookPos = startLookingHere;
+    int nlength = needle.length();
+    bool foundNeedle = false;
+    while(lookPos <= stringLength - nlength -1 and !foundNeedle){
+      if(charAt(lookPos) == needle[0]){
+        if(substring(lookPos, lookPos + stringLength - 1) == needle){
+          foundNeedle = true;
+        }
+      }
+      lookPos += 1;
+    }
+    if(foundNeedle){
+      return lookPos - 1;
+    }
+    else{
+      return -1;
+    }
+  }
+  
 	// returns the index of the first occurrence of needle in the string, 
 	// starting with index startPos if it exists, -1 otherwise
 }
 
 int StringBuilder::lastIndexOf(const string &needle, int startPos) const {
+  
+  
 	// returns the index of the last occurrence of needle in the string, 
 	// starting with index startPos if it exists, -1 otherwise
 }
