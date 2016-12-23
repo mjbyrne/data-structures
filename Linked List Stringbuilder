@@ -206,6 +206,7 @@ int StringBuilder::length() const {
 string StringBuilder::toString() const {
 	// forms and returns a string from the list of Nodes, concatenating the strings
 	// that each Node represent in order from the beginning to the end
+	return substring(0, length() - 1)
 }
 
 void StringBuilder::append(string str) {
@@ -233,6 +234,15 @@ void StringBuilder::replace(const string sub, const string replaceStr) {
 }
 
 StringBuilder::~StringBuilder() {
+  Node * location = positions;
+  while(location != nullptr){
+    while(location-> != nullptr){
+      location = location->next;
+    }
+  delete location;
+  location = positions;
+  }
+  
 	// destructor
 	// cleanup: need to remove all nodes in linked list (be careful with the order)
 }
