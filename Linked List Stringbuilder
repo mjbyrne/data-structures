@@ -221,10 +221,35 @@ void StringBuilder::append(string str) {
 
 void StringBuilder::deleteChars(int start, int end) {
 	// removes the characters from start to end from this string, inclusively
+	Node * location = positions;
+  int indexInNode = start;
+  while(indexInNode > location->endPos - location->startPos + 1){
+    indexInNode = indexInNode - (location->endPos - location->startPos + 1);
+    location = location->next;
+  }
+  int numCharsDeleted = location->endPos - indexInNode + 1;
+  // in node with start position
+  location->endPos = indexInNode -1; 
+  
+  indexInNode = end - start - numCharsDeleted;
+  Node * previousNode = location;
+  location = location->next;
+  while(indexInNode > location->endPos - location->startPos + 1){
+    previousNode->next = location->next;
+    delete location;
+    location = previousNode->next;
+  } //deletes all nodes that are completely within the end and start locations
+  
+  //now in node with end
+  location->startPos = indexInNode + 1;
+  
 }
+  
+
 
 void StringBuilder::deleteChars(int start) {
 	// removes the characters from start to the end of this string
+	
 }
 
 void StringBuilder::insert(int offset, const string str) {
