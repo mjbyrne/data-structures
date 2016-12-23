@@ -194,6 +194,12 @@ int StringBuilder::lastIndexOf(const string &needle, int startLookingHere) const
 }
 
 int StringBuilder::length() const {
+  Node * location = positions;
+  int stringLength = 0;
+  while(location!=nullptr){
+    stringLength  +=(location->endPos - location->startPos + 1); //#of chars in node
+    location = location->next;
+  }
 	// returns length of represented string
 }
 
