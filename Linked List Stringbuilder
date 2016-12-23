@@ -51,7 +51,7 @@ class StringBuilder {
 		~StringBuilder();
 		
 		// accessor methods
-		char charAt(int charIndex);
+		char charAt(int charIndex) const;
 		string substring(int start, int end) const;
 		string substring(int start) const;
 		string toString() const;
@@ -83,7 +83,7 @@ StringBuilder::StringBuilder(string str) {
 	//              from startPos to endPos that this node represents 
 }
 
-char StringBuilder::charAt(int charIndex){
+char StringBuilder::charAt(int charIndex) const {
   Node * location = positions;
   int indexInNode = charIndex;
   while(indexInNode > location->endPos - location->startPos + 1){
@@ -97,7 +97,13 @@ char StringBuilder::charAt(int charIndex){
 }
 
 string StringBuilder::substring(int start, int end) const {
-  
+  string tempString = "";
+  int currentIndexOfSubstring = start;
+  while (start < end +1){
+    tempString += charAt(currentIndexOfSubstring);
+    currentIndexOfSubstring += 1;
+  }
+  return tempString;
 	// returns the substring from start index start to end
 	// 
 }
