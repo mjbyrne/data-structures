@@ -277,6 +277,28 @@ void StringBuilder::insert(int offset, const string str) {
 
 void StringBuilder::reverse() {
 	// reverses the string that this represents
+	string reversedString  = "";
+	string normalString = toString();
+	int index = normalString.length() -1;
+	while (index >= 0){
+	  reversedString += normalString[index];
+	  index -= 1;
+	}
+	
+	
+	stringParts.push_back(reversedString())
+	Node * location = positions;
+	location = location->next;
+	while(location != nullptr){
+    while(location != nullptr){
+      location = location->next;
+    }
+    delete location; //delets all but first Node
+    location = positions->next;
+	}
+	positions->startPos = 0;
+	positions->endPos = reversedString.length() - 1;
+	positons->stringIndex = stringParts.size() -1;
 }
 
 void StringBuilder::replace(const string sub, const string replaceStr) {
@@ -298,8 +320,8 @@ StringBuilder::~StringBuilder() {
     while(location != nullptr){
       location = location->next;
     }
-  delete location;
-  location = positions;
+    delete location;
+    location = positions;
   }
   
 	// destructor
