@@ -211,6 +211,12 @@ string StringBuilder::toString() const {
 
 void StringBuilder::append(string str) {
 	// adds the string to the end of this one
+	Node * location = positions;
+	stringParts.push_back(str);
+	while(location->next != nullptr){
+	  location = location->next;
+	}
+	location->next = new Node(0, str.length() -1, stringParts.size() - 1);
 }
 
 void StringBuilder::deleteChars(int start, int end) {
@@ -230,6 +236,10 @@ void StringBuilder::reverse() {
 }
 
 void StringBuilder::replace(const string sub, const string replaceStr) {
+  while(indexOf(replaceStr, 0) != -1){
+    
+  }
+  
 	// replaces all occurrence of sub in string with replaceStr
 }
 
