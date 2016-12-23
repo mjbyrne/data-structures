@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -50,7 +51,7 @@ class StringBuilder {
 		~StringBuilder();
 		
 		// accessor methods
-		char charAt(int index) const;
+		char charAt(int charIndex);
 		string substring(int start, int end) const;
 		string substring(int start) const;
 		string toString() const;
@@ -72,18 +73,33 @@ class StringBuilder {
 };
 
 StringBuilder::StringBuilder(string str) {
+  
+  stringParts.push_back(str);
+  
+  Node * head = new Node(0, str.length() - 1, stringParts.size() - 1);
 	// constructor: set positions to new LinkedList of one node,
 	//              add str to stringParts using vector's push_back method
 	//              stringIndex represents the index of the string in stringParts
 	//              from startPos to endPos that this node represents 
 }
 
-char StringBuilder::charAt(int index) const {
+char StringBuilder::charAt(int charIndex){
+  Node * location = positions;
+  int indexInNode = charIndex;
+  while(indexInNode > location->endPos - location->startPos + 1){
+    indexInNode = indexInNode - (location->endPos - location->startPos + 1);
+  }
+  char charToGet =  stringParts[location->stringIndex][indexInNode];
+  return charToGet;
+  
 	// returns the character at index
+	// don't we need more info? we have the index for the character, but not the index of the stringParts to pull from
 }
 
 string StringBuilder::substring(int start, int end) const {
+  
 	// returns the substring from start index start to end
+	// 
 }
 
 string StringBuilder::substring(int start) const {
