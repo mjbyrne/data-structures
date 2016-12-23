@@ -286,7 +286,7 @@ void StringBuilder::reverse() {
 	}
 	
 	
-	stringParts.push_back(reversedString())
+	stringParts.push_back(reversedString);
 	Node * location = positions;
 	location = location->next;
 	while(location != nullptr){
@@ -298,7 +298,7 @@ void StringBuilder::reverse() {
 	}
 	positions->startPos = 0;
 	positions->endPos = reversedString.length() - 1;
-	positons->stringIndex = stringParts.size() -1;
+	positions->stringIndex = stringParts.size() -1;
 }
 
 void StringBuilder::replace(const string sub, const string replaceStr) {
