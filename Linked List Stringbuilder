@@ -88,6 +88,7 @@ char StringBuilder::charAt(int charIndex) const {
   int indexInNode = charIndex;
   while(indexInNode > location->endPos - location->startPos + 1){
     indexInNode = indexInNode - (location->endPos - location->startPos + 1);
+    location = location->next;
   }
   char charToGet =  stringParts[location->stringIndex][indexInNode];
   return charToGet;
@@ -99,7 +100,7 @@ char StringBuilder::charAt(int charIndex) const {
 string StringBuilder::substring(int start, int end) const {
   string tempString = "";
   int currentIndexOfSubstring = start;
-  while (start < end +1){
+  while (currentIndexOfSubstring <= end){
     tempString += charAt(currentIndexOfSubstring);
     currentIndexOfSubstring += 1;
   }
@@ -109,6 +110,18 @@ string StringBuilder::substring(int start, int end) const {
 }
 
 string StringBuilder::substring(int start) const {
+
+  string tempString = "";
+  Node * location = positions;
+  
+  int stringLength = start;
+  while(location!=nullptr){
+    stringLength  +=(location->endPos - location->startPos + 1); //#of chars in node
+    location = location->next;
+  }
+  substring(start, stringLength -1);
+    
+  
 	// returns the substring from start index to the end of the string
 }
 
