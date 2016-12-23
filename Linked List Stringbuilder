@@ -161,8 +161,33 @@ int StringBuilder::indexOf(const string &needle, int startLookingHere) const {
 	// starting with index startPos if it exists, -1 otherwise
 }
 
-int StringBuilder::lastIndexOf(const string &needle, int startPos) const {
+int StringBuilder::lastIndexOf(const string &needle, int startLookingHere) const {
+  Node * location = positions;
+  int stringLength = 0;
+  while(location!=nullptr){
+    stringLength  +=(location->endPos - location->startPos + 1); //#of chars in node
+    location = location->next;
+  }
+
   
+  if (startLookingHere >= stringLength){
+    return -1;
+  }
+  else{
+    int lookPos = startLookingHere;
+    int nlength = needle.length();
+    int foundLocation = -1;
+    while(lookPos <= stringLength - nlength -1){
+      if(charAt(lookPos) == needle[0]){
+        if(substring(lookPos, lookPos + stringLength - 1) == needle){
+          foundLocation = lookPos;
+        }
+      }
+      lookPos += 1;
+    }
+    return foundLocation;
+  }
+   
   
 	// returns the index of the last occurrence of needle in the string, 
 	// starting with index startPos if it exists, -1 otherwise
